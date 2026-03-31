@@ -17,9 +17,8 @@
 d3.select('#demo-1')
     .style('color', 'blue')
     .style('font-size', '20px')
-    .text('This text was changed by D3!');
+    .text('This text was changed by D3! - Muyu');
 
-// TODO: change the text above to add your name
 // TODO: change the color to something else you like // keep in mind color contrast
 
 
@@ -324,5 +323,3 @@ lineData.forEach((region, i) => {
 
 // Add title and axis label 
 // Do it yourself! Hint: look back at the bar chart code for how to add text elements for the title and axis labels.
-
-

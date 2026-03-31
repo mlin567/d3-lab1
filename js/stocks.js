@@ -18,9 +18,13 @@
 let stocks = await Promise.all([
     d3.csv("data/AAPL.csv").then(data => ({ name: "AAPL", values: data })),
     // TODO: Load GOOG.csv with name "GOOG"
+    d3.csv("data/GOOG.csv").then(data => ({ name: "GOOG", values: data })),
     // TODO: Load AMZN.csv with name "AMZN"
-    // TODO: LOAD IBM.csv with name "IBM"
-    // TODO: LOAD MSFT.csv with name "MSFT"
+    d3.csv("data/AMZN.csv").then(data => ({ name: "AMZN", values: data })),
+    // TODO: Load IBM.csv with name "IBM"
+    d3.csv("data/IBM.csv").then(data => ({ name: "IBM", values: data })),
+    // TODO: Load MSFT.csv with name "MSFT"
+    d3.csv("data/MSFT.csv").then(data => ({ name: "MSFT", values: data }))
 ]);
 
 console.log("Loaded stocks:", stocks);
@@ -36,15 +40,20 @@ stocks.forEach(stock => {
     stock.values.forEach(d => {
         // TODO: Convert d.Date from string to Date object
         // Hint: new Date(d.Date)
-        
+        d.Date = new Date(d.Date);
         // TODO: Convert d.Close from string to number
         // Hint: Use the + operator like +d.Close
-        
+        d.Close = +d.Close;
         // TODO: Convert these additional fields to numbers
         // d.Open, d.High, d.Low, d.Volume
+        d.Open = +d.Open;
+        d.High = +d.High;
+        d.Low = +d.Low;
+        d.Volume = +d.Volume;
     });
 
     // TODO: Sort stock.values by date (oldest to newest)
+    stock.values.sort((a, b) => a.Date - b.Date);
 });
 
 console.log("Processed first stock:", stocks[0].values[0]);
@@ -99,7 +108,7 @@ const y = d3.scaleLinear()
         // TODO: Get maximum Close price from all stocks
         
     ])
-    .range(/* TODO: define height range in pixels */);
+    .range([height, 0]);
 
 // Color Scale - Maps stock names to colors
 // TODO: Create an ordinal color scale
@@ -223,5 +232,4 @@ stocks.forEach((stock, i) => {
         .style('font-size', '12px')
         .text(/* TODO: add stock name */);
 });
-
 
